@@ -33,8 +33,7 @@ public class GastosRecifeServiceImpl implements GastosRecifeService {
     public List<DespesaGeralResponse> filtarGastosRecife(String filters) {
         val jsonRetorno = gastosRecifeClient.filtrarDaddos(RESOURCE_ID, filters);
         var retorno = mapper.jsonToObejctResponse(jsonRetorno);
-        ofNullable(retorno).orElseThrow(() -> new ExceptionCustomer("Não existem dados para os filtros informados!"));
-        return retorno;
+        return ofNullable(retorno).orElseThrow(() -> new ExceptionCustomer("Não existem dados para os filtros informados!"));
     }
 
     @Override
