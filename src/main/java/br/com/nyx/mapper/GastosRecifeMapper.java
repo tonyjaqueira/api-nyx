@@ -1,5 +1,6 @@
 package br.com.nyx.mapper;
 
+import br.com.nyx.exception.ExceptionCustomer;
 import br.com.nyx.model.response.DespesaGeralResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,7 +25,8 @@ public class GastosRecifeMapper {
                 recordsNode.forEach(result -> mapperToObject(listRetorno, objectMapper, result));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
+            throw new ExceptionCustomer("Ocorreu um erro ao tentar mapear os valores de gastos.");
         }
         return listRetorno;
     }
@@ -34,7 +36,8 @@ public class GastosRecifeMapper {
             var despesaGeralResponse = objectMapper.readValue(result.toString(), DespesaGeralResponse.class);
             listRetorno.add(despesaGeralResponse);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            log.error(e.getMessage());
+            throw new ExceptionCustomer("Ocorreu um erro ao tentar mapear os valores de gastos.");
         }
     }
 

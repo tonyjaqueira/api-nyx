@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface GastosRecifeClient {
 
     @GetMapping("/api/3/action/datastore_search")
-    String filtrarDaddos(@RequestParam(name = "resource_id") String resourceId, @RequestParam(name = "filters") String filters);
+    String filtrarDaddos(@RequestParam(name = "resource_id") String resourceId, @RequestParam(name = "filters") String filters, @RequestParam(name = "limit") int limit);
+
 
 }

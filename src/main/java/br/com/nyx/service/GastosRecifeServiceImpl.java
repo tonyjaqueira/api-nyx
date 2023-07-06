@@ -8,6 +8,7 @@ import br.com.nyx.model.response.DespesasTotaisCategoriaResponse;
 import br.com.nyx.model.response.DespesasTotaisMesResponse;
 import br.com.nyx.model.response.FonteRecursosResponse;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
@@ -17,23 +18,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.Optional.ofNullable;
-
 @Service
 @AllArgsConstructor
+@Slf4j
 public class GastosRecifeServiceImpl implements GastosRecifeService {
 
     private final GastosRecifeClient gastosRecifeClient;
     private final GastosRecifeMapper mapper;
     public static final String ANO_DEFAULT = "{\"ano_movimentacao\": \"2017\"}";
+    public static final Integer LIMIT_DEFAULT = 200;
     public static final String RESOURCE_ID = "d4d8a7f0-d4be-4397-b950-f0c991438111";
 
 
     @Override
     public List<DespesaGeralResponse> filtarGastosRecife(String filters) {
-        val jsonRetorno = gastosRecifeClient.filtrarDaddos(RESOURCE_ID, filters);
-        var retorno = mapper.jsonToObejctResponse(jsonRetorno);
-        return ofNullable(retorno).orElseThrow(() -> new ExceptionCustomer("Não existem dados para os filtros informados!"));
+        try {
+            val jsonRetorno = gastosRecifeClient.filtrarDaddos(RESOURCE_ID, filters, LIMIT_DEFAULT);
+            return mapper.jsonToObejctResponse(jsonRetorno);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ExceptionCustomer("Ocorreu um erro ao tentar consultar o serviço de dados de gastos da Prefeitura do Recife.");
+        }
     }
 
     @Override
