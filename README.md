@@ -24,7 +24,7 @@ mvn spring-boot:run
 ```
 
 <h3>Swagger da API</h3>
-http://localhost:8080/swagger-ui/index.html
+http://localhost:8080/swagger-ui/index.html#/
 
 
 <h3>Tecnologias utilizadas</h3>

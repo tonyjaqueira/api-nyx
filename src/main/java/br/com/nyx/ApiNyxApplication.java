@@ -5,12 +5,14 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Locale;
 import java.util.TimeZone;
 
 @SpringBootApplication
+@EnableFeignClients
 public class ApiNyxApplication {
 
     private static final String TIME_ZONE = "America/Sao_Paulo";
