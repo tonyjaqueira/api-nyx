@@ -17,7 +17,8 @@ https://github.com/tonyjaqueira/api-nyx.git
 
 <h3>Executar</h3>
 
-Para executar o projeto é necessário obter as valores de variaveis de ambiente que constam em application.properties
+Para executar o projeto basta executar os comandos abaixo, ou cofigura o projeto em sua IDE de desenvolvimento.
+Verção do Java necessária: 17
 
 ```shell
 mvn spring-boot:run

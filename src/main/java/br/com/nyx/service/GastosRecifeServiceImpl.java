@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +33,7 @@ public class GastosRecifeServiceImpl implements GastosRecifeService {
 
     @Override
     public List<DespesaGeralResponse> filtarGastosRecife(String filters) {
+        filters = Objects.isNull(filters) ? ANO_DEFAULT : filters;
         try {
             val jsonRetorno = gastosRecifeClient.filtrarDaddos(RESOURCE_ID, filters, LIMIT_DEFAULT);
             return mapper.jsonToObejctResponse(jsonRetorno);
